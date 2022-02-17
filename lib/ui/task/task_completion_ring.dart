@@ -4,11 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:habit_tracker/ui/theming/app_theme.dart';
 
 class TaskCompletionRing extends StatelessWidget {
-  const TaskCompletionRing({Key? key, required this.progress})
-      : super(key: key);
-
+  const TaskCompletionRing({required this.progress});
   final double progress;
-
   @override
   Widget build(BuildContext context) {
     final themeData = AppTheme.of(context);
@@ -26,14 +23,14 @@ class TaskCompletionRing extends StatelessWidget {
 }
 
 class RingPainter extends CustomPainter {
+  RingPainter({
+    required this.progress,
+    required this.taskNotCompletedColor,
+    required this.taskCompletedColor,
+  });
   final double progress;
   final Color taskNotCompletedColor;
   final Color taskCompletedColor;
-
-  RingPainter(
-      {required this.progress,
-      required this.taskNotCompletedColor,
-      required this.taskCompletedColor});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -51,6 +48,7 @@ class RingPainter extends CustomPainter {
         ..style = PaintingStyle.stroke;
       canvas.drawCircle(center, radius, backgroundPaint);
     }
+
     final foregroundPaint = Paint()
       ..isAntiAlias = true
       ..strokeWidth = strokeWidth
